@@ -105,3 +105,6 @@ function addMarker(latLng) {
     });
     markersArray.push(marker);
 }
+window.onload = function(){
+  initmap();
+};
