@@ -53,7 +53,7 @@ let elevationObserver = {
             var phiB = ((-1)*g*Mt)/rB;
 
             var fA = (phiA)/c;
-            var fB = fA*(1+phiB/square(c));
+            var fB = fA*(1+phiB/Math.sqrt(c));
 
             var deltaF = fB - fA;
 
