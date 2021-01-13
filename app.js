@@ -1,17 +1,15 @@
 let map;
-let markersArray = null;
+let markersArray = [];
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 5,
-        center: { lat: 41.833, lng: 15.333 },  // centre de france.
-        mapTypeId: 'terrain'
+        zoom: 6,
+        center: { lat: 47.22, lng: 2.49 },
+        mapTypeId: 'terrain',
+        draggableCursor : 'default'
     });
     var elevator = new google.maps.ElevationService;
     var infowindow = new google.maps.InfoWindow({ map: map });
-
-    // Add a listener for the click event. Display the elevation for the LatLng of
-    // the click inside the infowindow.
 
     map.addListener('click', function(event) {
         console.log(event);
@@ -24,8 +22,9 @@ function initMap() {
 }
 
 var g = 9.81;
-var c = 299792458; //en m/s
-var Mt = 6.38 * Math.pow(10, 6);
+var c = 299792458;
+var Mt = 5/972 * Math.pow(10, 24);
+var Rs = (2*g*Mt)/Math.pow(c,2);
 
 let elevationObserver = {
     value1: undefined,
@@ -36,24 +35,36 @@ let elevationObserver = {
         }
         else if (!this.value2) {
             this.value2 = newVal;
-            var rA = value1 + 6371000; //en m
-            var rB = value2 + 6371000; //en m
+            var rA = value1 + 6371000;
+            var rB = value2 + 6371000;
 
-            var phiA = ((-1)*g*Mt)/rA;
-            var phiB = ((-1)*g*Mt)/rB;
+            //var phiA = ((-1)*g*Mt)/rA;
+            //var phiB = ((-1)*g*Mt)/rB;
 
-            var fA = (phiA)/c;
-            var fB = fA*(1+phiB/Math.sqrt(c));
+            // ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)));
 
-            var deltaF = fB - fA;
+            var deltaF = ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)))-1;
 
-            var f1 = document.getElementById('f1');
-            f1.textContent = fA + 'Hz';
-            var f2 = document.getElementById('f2');
-            f2.textContent = fB + 'Hz';
+            //fA = fA.toPrecision(6);
+            //fB = fB.toPrecision(6);
+            var hA = value1.toPrecision(4);
+            var hB = value2.toPrecision(4);
+            deltaF = deltaF.toPrecision(4);
+
+            var h1 = document.getElementById('h1');
+            h1.textContent = hA + ' m';
+
+            var h2 = document.getElementById('h2');
+            h2.textContent = hB + ' m';
+
+            //var f1 = document.getElementById('f1');
+            //f1.textContent = fA + ' Hz';
+
+            //var f2 = document.getElementById('f2');
+            //f2.textContent = fB + ' Hz';
 
             var decaF = document.getElementById('decaF');
-            decaF.textContent = deltaF + 'Hz';
+            decaF.textContent = deltaF;
 
             console.log(deltaF);
         }
@@ -66,15 +77,12 @@ let elevationObserver = {
 }
 
 function displayLocationElevation(location, elevator, infowindow) {
-    // Initiate the location request
     elevator.getElevationForLocations({
         'locations': [location]
     }, function (results, status) {
         infowindow.setPosition(location);
         if (status === 'OK') {
-            // Retrieve the first result
             if (results[0]) {
-                // Open the infowindow indicating the elevation at the clicked position.
                 infowindow.setContent('La hauteur en ce point <br>est ' +
                     results[0].elevation + ' m');
                 elevationObserver.setValue(results[0].elevation);
