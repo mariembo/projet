@@ -40,7 +40,6 @@ let elevationObserver = {
 
             //var phiA = ((-1)*g*Mt)/rA;
             //var phiB = ((-1)*g*Mt)/rB;
-
             // ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)));
 
             var deltaF = ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)))-1;
@@ -67,9 +66,10 @@ let elevationObserver = {
             decaF.textContent = deltaF;
             
             Mt.textContent = Mt;
-            var lol = Math.pow(10,24);
             
+            var lol = Math.pow(10,24);
             lol.textContent = lol;
+            
             console.log(Mt);
             console.log(lol);
             console.log(deltaF);
