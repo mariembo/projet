@@ -37,10 +37,6 @@ let elevationObserver = {
             this.value2 = newVal;
             var rA = value1 + 6371000;
             var rB = value2 + 6371000;
-            
-            
-            console.log(Mt);
-            console.log(Math.pow(10,24);
 
             //var phiA = ((-1)*g*Mt)/rA;
             //var phiB = ((-1)*g*Mt)/rB;
@@ -69,7 +65,13 @@ let elevationObserver = {
 
             var decaF = document.getElementById('decaF');
             decaF.textContent = deltaF;
-
+            
+            Mt.textContent = Mt;
+            var lol = Math.pow(10,24);
+            
+            lol.textContent = lol;
+            console.log(Mt);
+            console.log(Math.pow(lol);
             console.log(deltaF);
         }
         else {
