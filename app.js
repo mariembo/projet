@@ -38,10 +38,6 @@ let elevationObserver = {
             var rA = value1 + 6371000;
             var rB = value2 + 6371000;
 
-            //var phiA = ((-1)*g*Mt)/rA;
-            //var phiB = ((-1)*g*Mt)/rB;
-            // ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)));
-
             var deltaF = ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)))-1;
 
             //fA = fA.toPrecision(6);
