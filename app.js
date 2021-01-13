@@ -23,7 +23,7 @@ function initMap() {
 
 var g = 9.81;
 var c = 299792458;
-var Mt = 5/972 * Math.pow(10, 24);
+var Mt = 5.972 * Math.pow(10, 24);
 var Rs = (2*g*Mt)/Math.pow(c,2);
 
 let elevationObserver = {
