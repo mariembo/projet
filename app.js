@@ -1,6 +1,6 @@
 let map;
-  // define global array to store markers added
-  let markersArray = [];
+let markersArray = null;
+
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5,
@@ -21,16 +21,11 @@ function initMap() {
         displayLocationElevation(event.latLng, elevator, infowindow);
         addMarker(event.latLng)
     });
-
-
 }
-
 
 var g = 9.81;
 var c = 299792458; //en m/s
 var Mt = 6.38 * Math.pow(10, 6);
-
-
 
 let elevationObserver = {
     value1: undefined,
@@ -38,11 +33,6 @@ let elevationObserver = {
     setValue: (newVal) => {
         if (!this.value1) {
             this.value1 = newVal;
-            /*this.value1 = {
-                elevation: newVal,
-                lat: undefined,
-                long: undefined,
-            };*/
         }
         else if (!this.value2) {
             this.value2 = newVal;
@@ -63,7 +53,7 @@ let elevationObserver = {
             f2.textContent = fB + 'Hz';
 
             var decaF = document.getElementById('decaF');
-            decaF.textContent = deltaF;
+            decaF.textContent = deltaF + 'Hz';
 
             console.log(deltaF);
         }
@@ -105,4 +95,3 @@ function addMarker(latLng) {
     });
     markersArray.push(marker);
 }
-initmap();
