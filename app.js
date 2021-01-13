@@ -21,10 +21,10 @@ function initMap() {
     });
 }
 
-var g = 9.81;
+var G = 6.67430*Math.pow(10,-11);
 var c = 299792458;
 var Mt = 5.972*Math.pow(10,24);
-var Rs = (2*g*Mt)/Math.pow(c,2);
+var Rs = (2*G*Mt)/Math.pow(c,2);
 
 let elevationObserver = {
     value1: undefined,
@@ -38,12 +38,11 @@ let elevationObserver = {
             var rA = value1 + 6371000;
             var rB = value2 + 6371000;
 
-            var deltaF = ((Math.sqrt(1-Rs/rA))/(Math.sqrt(1-Rs/rB)))-1;
+            var deltaF = (Math.sqrt(1-Rs/rA)/Math.sqrt(1-Rs/rB))-1;
 
-            //fA = fA.toPrecision(6);
-            //fB = fB.toPrecision(6);
             var hA = value1.toPrecision(4);
             var hB = value2.toPrecision(4);
+
             deltaF = deltaF.toPrecision(4);
 
             var h1 = document.getElementById('h1');
@@ -52,22 +51,9 @@ let elevationObserver = {
             var h2 = document.getElementById('h2');
             h2.textContent = hB + ' m';
 
-            //var f1 = document.getElementById('f1');
-            //f1.textContent = fA + ' Hz';
-
-            //var f2 = document.getElementById('f2');
-            //f2.textContent = fB + ' Hz';
-
             var decaF = document.getElementById('decaF');
             decaF.textContent = deltaF;
-            
-            Mt.textContent = Mt;
-            
-            var lol = Math.pow(10,24);
-            lol.textContent = lol;
-            
-            console.log(Mt);
-            console.log(lol);
+
             console.log(deltaF);
         }
         else {
@@ -105,3 +91,4 @@ function addMarker(latLng) {
     });
     markersArray.push(marker);
 }
+
