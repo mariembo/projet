@@ -71,7 +71,7 @@ let elevationObserver = {
             
             lol.textContent = lol;
             console.log(Mt);
-            console.log(Math.pow(lol);
+            console.log(lol);
             console.log(deltaF);
         }
         else {
