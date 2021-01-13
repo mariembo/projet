@@ -3,7 +3,7 @@ let markersArray = [];
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 6,
+        zoom: 8,
         center: { lat: 47.22, lng: 2.49 },
         mapTypeId: 'terrain',
         draggableCursor : 'default'
